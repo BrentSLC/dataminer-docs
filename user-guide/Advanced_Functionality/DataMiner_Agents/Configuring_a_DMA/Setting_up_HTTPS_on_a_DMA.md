@@ -34,6 +34,9 @@ To securely host your DataMiner Agent, we recommend that you make sure HTTPS con
 > [!TIP]
 > It is good practice to completely disable **HTTP** by removing the HTTP binding, meaning that only HTTPS traffic will be accepted. Once the binding is removed, you can close port 80 in the Windows Firewall.
 
+> [!NOTE]
+> Make sure the certificate you use is trusted by client machines (devices running Cube, webapps,etc.). see [trusting a certificate in Windows](https://techcommunity.microsoft.com/t5/windows-server-essentials-and/installing-a-self-signed-certificate-as-a-trusted-root-ca-in/ba-p/396105).
+
 ## Configuring HTTPS in DataMiner
 
 To configure a DataMiner Agent to use HTTPS, you need to add a line to the *MaintenanceSettings.xml* file (on every DataMiner Agent in the DMS).
@@ -180,6 +183,8 @@ The following auto-detect methods can be specified:
 - **I can no longer launch DataMiner Cube from the DataMiner Cube start window**
 
     If you added the DMS based on the IP address, this may no longer work if HTTPS is required. Add a new DataMiner System and **use the FQDN** instead of the IP address. See [Opening DataMiner Cube](xref:Using_the_desktop_app).
+
+  If you are using the **FQDN** matching the certificate but still get "Retrieving application file over http and https failed." when trying to connect, your machine likely does not trust the certificate or the certificate is self-signed. Ensure the certificate is added to the Trusted Root Certification Authorities of your certificate store on the client machine. For more information, see [trusting a certificate in Windows](https://techcommunity.microsoft.com/t5/windows-server-essentials-and/installing-a-self-signed-certificate-as-a-trusted-root-ca-in/ba-p/396105).
 
 - **The webpage could not be found (HTTP 404 error)**
 
